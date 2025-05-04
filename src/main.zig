@@ -38,7 +38,10 @@ pub fn main() !void {
 
     for (tasks, 0..) |task, i| {
         if (i == index) break;
+        const alloc = std.heap.page_allocator;
 
+        try file.writeAll(try std.fmt.allocPrint(alloc, "{}", .{i + 1}));
+        try file.writeAll(") ");
         try file.writeAll(task);
         try file.writeAll(" [x]\n");
     }
